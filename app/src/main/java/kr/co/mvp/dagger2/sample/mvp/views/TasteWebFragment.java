@@ -29,7 +29,7 @@ import java.net.URLDecoder;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import kr.co.mvp.dagger2.sample.R;
-import kr.co.mvp.dagger2.sample.mvp.BaseMvpFragment;
+import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
 
 /**
  * Created by 8454 on 2016-08-16.
@@ -75,6 +75,7 @@ public class TasteWebFragment extends BaseMvpFragment {
         webSettings.setLoadsImagesAutomatically(true); // 웹뷰가 앱에 등록되어 있는 이미지 리소스를 자동으로 로드하도록 설정
         webSettings.setUseWideViewPort(true); // wide viewport를 사용하도록 설정
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 웹뷰가 캐시를 사용하지 않도록 설정
+
         ProgressDialog progressDialog = progressDialogProvider.provide();
         webView.setWebViewClient(new WebViewClient() {
             @Override

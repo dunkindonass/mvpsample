@@ -4,7 +4,7 @@ import dagger.Subcomponent;
 import kr.co.mvp.dagger2.sample.dagger.PerActivity;
 import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
 import kr.co.mvp.dagger2.sample.dagger.module.FragmentMoudule;
-import kr.co.mvp.dagger2.sample.mvp.BaseMvpActivity;
+import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
 import kr.co.mvp.dagger2.sample.mvp.views.MainActivity;
 
 /**

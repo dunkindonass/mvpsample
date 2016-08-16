@@ -22,8 +22,9 @@ import kr.co.mvp.dagger2.sample.SampleApplication;
 import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
 import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
 import kr.co.mvp.dagger2.sample.dagger.module.FragmentMoudule;
-import kr.co.mvp.dagger2.sample.mvp.BaseMvpActivity;
-import kr.co.mvp.dagger2.sample.mvp.BaseMvpFragment;
+import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
+import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
+import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 import kr.co.mvp.dagger2.sample.mvp.model.Place;
 import kr.co.mvp.dagger2.sample.mvp.presentor.GitHubListView;
@@ -35,8 +36,10 @@ import kr.co.mvp.dagger2.sample.mvp.presentor.GithubListPresenter;
 
 public class TasteListFragment extends BaseMvpFragment implements GitHubListView {
 
+
     @Inject
     Resources resources;
+
     @Inject
     GithubListPresenter githubListPresenter;
 

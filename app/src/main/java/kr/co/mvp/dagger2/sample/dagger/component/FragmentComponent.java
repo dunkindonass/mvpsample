@@ -4,7 +4,7 @@ import dagger.Component;
 import dagger.Subcomponent;
 import kr.co.mvp.dagger2.sample.dagger.PerFragment;
 import kr.co.mvp.dagger2.sample.dagger.module.FragmentMoudule;
-import kr.co.mvp.dagger2.sample.mvp.BaseMvpFragment;
+import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
 import kr.co.mvp.dagger2.sample.mvp.views.TasteListFragment;
 
 /**

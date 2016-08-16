@@ -1,6 +1,7 @@
 package kr.co.mvp.dagger2.sample.mvp.presentor;
 
-import kr.co.mvp.dagger2.sample.mvp.BaseMvpView;
+
+import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpView;
 
 /**
  * Created by 8454 on 2016-08-10.

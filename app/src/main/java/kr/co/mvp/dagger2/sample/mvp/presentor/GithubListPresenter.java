@@ -5,7 +5,7 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
-import kr.co.mvp.dagger2.sample.mvp.BaseMvpView;
+import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 import kr.co.mvp.dagger2.sample.network.service.NetworkApi;
 import rx.Observable;

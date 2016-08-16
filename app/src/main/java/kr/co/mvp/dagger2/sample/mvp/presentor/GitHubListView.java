@@ -2,7 +2,7 @@ package kr.co.mvp.dagger2.sample.mvp.presentor;
 
 import java.util.ArrayList;
 
-import kr.co.mvp.dagger2.sample.mvp.BaseMvpView;
+import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpView;
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 
 /**
