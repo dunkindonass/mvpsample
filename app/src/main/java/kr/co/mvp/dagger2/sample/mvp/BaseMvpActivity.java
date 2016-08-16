@@ -87,12 +87,11 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
 
         String ROOTTAG = currentFragment.getRootFragmentTag();
         if (!StringUtils.isNullOrEmpty(ROOTTAG)) {
-            Log.e("!StringUtils.isNullOrEmpty(ROOTTAG)","call");
             //MainFragment 까지 back
             //getSupportFragmentManager().popBackStack(MAINFRAGMENT, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else {
             //Rootfragment없을때
-            Log.e("else","call");
+            Log.e("else", "call");
             String currentTag = currentFragment.getFragmentTag();
             getSupportFragmentManager()
                     .popBackStack(currentTag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -110,7 +109,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
             alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                   finish();
+                    finish();
                 }
             });
             alert.setNegativeButton("no", new DialogInterface.OnClickListener() {
