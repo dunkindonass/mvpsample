@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sample</string>
+    <string name="weblink_blank">WebLink is Blank!!!</string>
+    <string name="loading_string">Loading...</string>
+</resources>
