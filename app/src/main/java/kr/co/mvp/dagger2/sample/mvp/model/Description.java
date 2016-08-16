@@ -6,6 +6,6 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Description {
 
-    public Boolean isAlternativeResult;
+    private Boolean isAlternativeResult;
 
 }

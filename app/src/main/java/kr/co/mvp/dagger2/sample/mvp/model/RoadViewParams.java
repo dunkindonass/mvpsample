@@ -6,10 +6,10 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class RoadViewParams {
 
-    public Integer panoId;
-    public Float photoX;
-    public Float photoY;
-    public Float pan;
-    public Float tilt;
+    private Integer panoId;
+    private Float photoX;
+    private Float photoY;
+    private Float pan;
+    private Float tilt;
 
 }

@@ -6,9 +6,9 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class SearchPoint {
 
-    public Float x;
-    public Float y;
-    public String coordType;
-    public Boolean isCenterProvided;
+    private Float x;
+    private Float y;
+    private String coordType;
+    private Boolean isCenterProvided;
 
 }

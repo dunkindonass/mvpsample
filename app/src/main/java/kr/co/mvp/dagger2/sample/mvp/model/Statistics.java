@@ -6,14 +6,14 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Statistics {
 
-    public Integer totalCount;
-    public Integer totalPlaceCount;
-    public Integer totalAddressCount;
-    public Integer totalBusStopCount;
-    public Integer totalBusLineCount;
-    public Integer totalPlacePages;
-    public Integer totalAddressPages;
-    public Integer totalBusStopPages;
-    public Integer totalBusLinePages;
+    private Integer totalCount;
+    private Integer totalPlaceCount;
+    private Integer totalAddressCount;
+    private Integer totalBusStopCount;
+    private Integer totalBusLineCount;
+    private Integer totalPlacePages;
+    private Integer totalAddressPages;
+    private Integer totalBusStopPages;
+    private Integer totalBusLinePages;
 
 }

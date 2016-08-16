@@ -10,9 +10,9 @@ import lombok.Data;
 @Data
 public class SearchItems {
 
-    public List<Object> addresses = new ArrayList<Object>();
-    public List<Object> busStops = new ArrayList<Object>();
-    public List<Place> places = new ArrayList<Place>();
-    public List<Object> busLines = new ArrayList<Object>();
+    private List<Object> addresses = new ArrayList<Object>();
+    private List<Object> busStops = new ArrayList<Object>();
+    private List<Place> places = new ArrayList<Place>();
+    private List<Object> busLines = new ArrayList<Object>();
 
 }

@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Category_ {
 
-    public String code;
-    public String name;
+    private String code;
+    private String name;
 
 }

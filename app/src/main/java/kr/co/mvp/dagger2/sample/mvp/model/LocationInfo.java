@@ -8,19 +8,19 @@ import lombok.Data;
 @Data
 public class LocationInfo {
 
-    public String version;
-    public ApiResult apiResult;
-    public String query;
-    public Integer pageNo;
-    public Integer pageSize;
-    public SearchPoint searchPoint;
-    public String suggestedResultViewType;
-    public String suggestedDisplayItem;
-    public Statistics statistics;
-    public Description description;
-    public Category category;
-    public SortType sortType;
-    public Integer otherSearchIndex;
-    public SearchItems searchItems;
+    private String version;
+    private ApiResult apiResult;
+    private String query;
+    private Integer pageNo;
+    private Integer pageSize;
+    private SearchPoint searchPoint;
+    private String suggestedResultViewType;
+    private String suggestedDisplayItem;
+    private Statistics statistics;
+    private Description description;
+    private Category category;
+    private SortType sortType;
+    private Integer otherSearchIndex;
+    private SearchItems searchItems;
 
 }
