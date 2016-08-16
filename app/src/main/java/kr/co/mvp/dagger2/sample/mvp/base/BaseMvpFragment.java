@@ -1,4 +1,4 @@
-package kr.co.mvp.dagger2.sample.mvp;
+package kr.co.mvp.dagger2.sample.mvp.base;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

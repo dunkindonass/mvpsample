@@ -46,5 +46,4 @@ public class MainActivity extends BaseMvpActivity {
         ((ApplicationComponent) SampleApplication.getApplicationComponent()).addActivityComponent(new ActivityModoule(this)).inject(this);
     }
 
-
 }
