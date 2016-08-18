@@ -32,6 +32,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
 
     @Inject
     protected PreferenceUtil PREFERENCE;
+
     @Inject
     protected ProgressDialogProvider progressDialogProvider;
 
@@ -45,6 +46,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
     }
 
     public void onInject() {
+
         ((ApplicationComponent) SampleApplication.getApplicationComponent()).addActivityComponent(new ActivityModoule(this)).inject((BaseMvpActivity) this);
     }
 

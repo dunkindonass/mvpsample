@@ -1,9 +1,7 @@
 package kr.co.mvp.dagger2.sample.dagger.module;
 
-import android.app.Application;
 import android.content.Context;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;

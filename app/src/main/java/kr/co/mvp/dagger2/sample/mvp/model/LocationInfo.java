@@ -1,8 +1,6 @@
 
 package kr.co.mvp.dagger2.sample.mvp.model;
 
-import javax.annotation.Generated;
-
 import lombok.Data;
 
 @Data

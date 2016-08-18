@@ -2,7 +2,6 @@ package kr.co.mvp.dagger2.sample.network.service;
 
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 

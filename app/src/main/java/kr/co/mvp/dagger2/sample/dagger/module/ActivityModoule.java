@@ -1,7 +1,6 @@
 package kr.co.mvp.dagger2.sample.dagger.module;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 
 import dagger.Module;
 import dagger.Provides;

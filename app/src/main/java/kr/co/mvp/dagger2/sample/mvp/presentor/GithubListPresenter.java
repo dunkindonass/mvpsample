@@ -1,11 +1,9 @@
 package kr.co.mvp.dagger2.sample.mvp.presentor;
 
 import android.content.res.Resources;
-import android.util.Log;
 
 import javax.inject.Inject;
 
-import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 import kr.co.mvp.dagger2.sample.network.service.NetworkApi;
 import rx.Observable;

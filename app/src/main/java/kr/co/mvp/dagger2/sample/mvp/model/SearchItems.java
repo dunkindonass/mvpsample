@@ -3,7 +3,6 @@ package kr.co.mvp.dagger2.sample.mvp.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Generated;
 
 import lombok.Data;
 

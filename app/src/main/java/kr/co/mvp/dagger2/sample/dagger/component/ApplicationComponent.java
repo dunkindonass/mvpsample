@@ -1,7 +1,5 @@
 package kr.co.mvp.dagger2.sample.dagger.component;
 
-import android.app.Application;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
