@@ -1,4 +1,4 @@
-package kr.co.mvp.dagger2.sample.mvp.presentor;
+package kr.co.mvp.dagger2.sample.mvp.presenter;
 
 
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpView;
@@ -7,7 +7,7 @@ import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpView;
  * Created by 8454 on 2016-08-10.
  */
 
-public class BasePresentor<VIEW extends BaseMvpView> {
+public class BasePresenter<VIEW extends BaseMvpView> {
 
     private VIEW view;
 

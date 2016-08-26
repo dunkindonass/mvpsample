@@ -25,8 +25,8 @@ import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 import kr.co.mvp.dagger2.sample.mvp.model.Place;
-import kr.co.mvp.dagger2.sample.mvp.presentor.GitHubListView;
-import kr.co.mvp.dagger2.sample.mvp.presentor.GithubListPresenter;
+import kr.co.mvp.dagger2.sample.mvp.presenter.GitHubListView;
+import kr.co.mvp.dagger2.sample.mvp.presenter.GithubListPresenter;
 
 /**
  * Created by 8454 on 2016-08-16.
