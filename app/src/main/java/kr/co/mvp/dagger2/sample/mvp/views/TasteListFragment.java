@@ -8,14 +8,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.SampleApplication;
 import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
@@ -25,25 +36,33 @@ import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 import kr.co.mvp.dagger2.sample.mvp.model.Place;
-import kr.co.mvp.dagger2.sample.mvp.presenter.GitHubListView;
-import kr.co.mvp.dagger2.sample.mvp.presenter.GithubListPresenter;
+import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListPresenter;
+import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListView;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subjects.PublishSubject;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by 8454 on 2016-08-16.
  */
 
-public class TasteListFragment extends BaseMvpFragment implements GitHubListView {
+public class TasteListFragment extends BaseMvpFragment implements TasteListView {
 
 
     @Inject
     Resources resources;
 
     @Inject
-    GithubListPresenter githubListPresenter;
+    TasteListPresenter githubListPresenter;
 
     @Bind(R.id.recyler_view)
     RecyclerView recyclerView;
-
+    @Bind(R.id.text)
+    TextView numbertext;
 
     private ArrayList<Place> searchItems = new ArrayList<>();
     private int index = 1;
@@ -57,6 +76,70 @@ public class TasteListFragment extends BaseMvpFragment implements GitHubListView
         View fragmentView = inflater.inflate(R.layout.tastelistfragment, container, false);
         ButterKnife.bind(this, fragmentView);
         return fragmentView;
+    }
+
+
+    @OnClick(R.id.btn)
+    public void click() {
+
+        Random random = new Random();
+        Observable<Integer> integerObservable = Observable.create(subscriber -> subscriber.onNext(random.nextInt(46) + 1));
+
+
+        Subscription subscription = new CompositeSubscription();
+
+        HashMap<Integer, Integer> data = new HashMap<>();
+
+        //Observable.interval(500, TimeUnit.MICROSECONDS).flatMap(aLong -> Observable.just(random.nextInt(46))).subscribe(integer -> System.out.println(integer));
+        PublishSubject<HashMap<Integer, Integer>> publishSubject = PublishSubject.create();
+        Observable<Integer> observableObservable = Observable.create(subscriber -> {
+            subscriber.onNext(random.nextInt(46) + 1);
+            subscriber.onCompleted();
+        });
+        observableObservable.subscribeOn(Schedulers.io()).repeat(10000).compose(injectProgress()).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onCompleted() {
+
+                publishSubject.onNext(data);
+                System.out.println("data print" + data);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                if (data.containsKey(integer)) {
+                    data.put(integer, data.get(integer) + 1);
+                } else {
+                    data.put(integer, 1);
+                }
+            }
+        });
+
+
+        publishSubject.subscribe(integerIntegerHashMap -> {
+            List<Map.Entry<Integer, Integer>> list = new LinkedList<Map.Entry<Integer, Integer>>(integerIntegerHashMap.entrySet());
+            Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+                public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                    return (o1.getValue()).compareTo(o2.getValue());
+                }
+            });
+
+            ArrayList<Integer> result = new ArrayList<Integer>();
+            for (Map.Entry<Integer, Integer> entry : list) {
+                result.add(entry.getKey());
+            }
+
+            Observable.from(result).take(6).toList().observeOn(AndroidSchedulers.mainThread()).subscribe(integers ->
+                    numbertext.append("\n"+new Gson().toJson(integers)));
+
+
+        });
+
+
     }
 
     @Override
