@@ -1,6 +1,8 @@
 package kr.co.mvp.dagger2.sample;
 
 import android.app.Application;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
 import kr.co.mvp.dagger2.sample.dagger.component.DaggerApplicationComponent;
@@ -12,7 +14,7 @@ import kr.co.mvp.dagger2.sample.dagger.module.NetworkModule;
  * Created by 8454 on 2016-08-09.
  */
 
-public class SampleApplication extends Application {
+public class SampleApplication extends MultiDexApplication {
 
 
     static ApplicationComponent applicationComponent;
@@ -20,6 +22,8 @@ public class SampleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
+
         applicationComponent = createApplicationComponent();
     }
 

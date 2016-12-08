@@ -1,12 +1,17 @@
 package kr.co.mvp.dagger2.sample.mvp.views;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -35,22 +40,28 @@ import static rx.Observable.combineLatest;
 
 public class MainActivity extends BaseMvpActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         init();
-        rxLimitTest();
+        getDate();
     }
 
     public void init() {
         onCallFragment(new TasteListFragment(), ROOTFRAGMENT, null);
-
     }
 
 
+    public void getDate(){
+        long currentDate=System.currentTimeMillis();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("F");
+        String result=simpleDateFormat.format(new Date(currentDate));
+        Log.e("result::",result);
+
+
+    }
     public void rxLimitTest() {
         Random random = new Random();
         Observable<Integer> integerObservable = Observable.create(subscriber -> subscriber.onNext(random.nextInt(46) + 1));

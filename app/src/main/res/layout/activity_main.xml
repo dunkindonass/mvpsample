@@ -13,7 +13,10 @@
         android:textSize="20px"
         android:textStyle="bold" />
 
-
+    <me.relex.photodraweeview.PhotoDraweeView
+        android:id="@+id/zoom_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <FrameLayout
         android:id="@+id/container_layout"
