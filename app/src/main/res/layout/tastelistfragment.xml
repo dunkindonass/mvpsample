@@ -17,8 +17,19 @@
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로또" />
-
+        android:text="입력" />
+    <Button
+        android:id="@+id/btn02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn"
+        android:text="조회" />
+    <Button
+        android:id="@+id/btn03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn02"
+        android:text="조건조회" />
     <TextView
         android:id="@+id/text"
         android:layout_below="@id/btn"
@@ -27,6 +38,7 @@
         android:textSize="@dimen/px20"
         android:textColor="#000000"
         android:textStyle="bold"
+        android:visibility="gone"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

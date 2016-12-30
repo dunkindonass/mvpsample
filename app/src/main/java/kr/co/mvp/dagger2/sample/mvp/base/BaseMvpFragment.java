@@ -24,6 +24,7 @@ public abstract class BaseMvpFragment extends Fragment implements BaseMvpView {
 
     @Inject
     protected Activity parentActivity;
+
     @Inject
     protected PreferenceUtil PREFERENCE;
     @Inject
@@ -38,8 +39,10 @@ public abstract class BaseMvpFragment extends Fragment implements BaseMvpView {
     }
 
     public void onFragmentInject() {
-        ((ApplicationComponent) SampleApplication.getApplicationComponent()).addActivityComponent(new ActivityModoule(getActivity())).addFragmentModule(new FragmentMoudule(this)).inject(this);
+        ((BaseMvpActivity)getActivity()).activityComponent.addFragmentComponent(new FragmentMoudule(this)).inject(this);
     }
+
+
 
     @Override
     public void onResume() {

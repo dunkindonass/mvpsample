@@ -1,5 +1,6 @@
 package kr.co.mvp.dagger2.sample.mvp.base;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.SampleApplication;
+import kr.co.mvp.dagger2.sample.dagger.component.ActivityComponent;
 import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
 import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
@@ -38,6 +40,8 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
 
     public static final String ROOTFRAGMENT = "rootfragment";
 
+    protected ActivityComponent activityComponent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         onInject();
@@ -46,8 +50,8 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
     }
 
     public void onInject() {
-
-        ((ApplicationComponent) SampleApplication.getApplicationComponent()).addActivityComponent(new ActivityModoule(this)).inject((BaseMvpActivity) this);
+        activityComponent= SampleApplication.component(this).addActivtiyComponent(new ActivityModoule(this));
+        activityComponent.inject(this);
     }
 
     @Override
@@ -132,6 +136,10 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
 
     public void setCurrentFragment(BaseMvpFragment fragment) {
         this.currentFragment = fragment;
+    }
+
+    public ActivityComponent getActivityComponent(){
+        return activityComponent;
     }
 
 }

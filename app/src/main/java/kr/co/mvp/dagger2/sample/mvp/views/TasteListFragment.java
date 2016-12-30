@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.j256.ormlite.stmt.Where;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,12 +33,14 @@ import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.SampleApplication;
 import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
 import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
+import kr.co.mvp.dagger2.sample.dagger.module.DataModule;
 import kr.co.mvp.dagger2.sample.dagger.module.FragmentMoudule;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
+import kr.co.mvp.dagger2.sample.mvp.database.vo.UserInfo;
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 import kr.co.mvp.dagger2.sample.mvp.model.Place;
-import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListPresenter;
+import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListPresenterImpl;
 import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListView;
 import rx.Observable;
 import rx.Subscriber;
@@ -57,7 +61,7 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     Resources resources;
 
     @Inject
-    TasteListPresenter githubListPresenter;
+    TasteListPresenterImpl githubListPresenter;
 
     @Bind(R.id.recyler_view)
     RecyclerView recyclerView;
@@ -79,72 +83,12 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     }
 
 
-    @OnClick(R.id.btn)
-    public void click() {
-
-        Random random = new Random();
-        Observable<Integer> integerObservable = Observable.create(subscriber -> subscriber.onNext(random.nextInt(46) + 1));
-
-
-        Subscription subscription = new CompositeSubscription();
-
-        HashMap<Integer, Integer> data = new HashMap<>();
-
-        //Observable.interval(500, TimeUnit.MICROSECONDS).flatMap(aLong -> Observable.just(random.nextInt(46))).subscribe(integer -> System.out.println(integer));
-        PublishSubject<HashMap<Integer, Integer>> publishSubject = PublishSubject.create();
-        Observable<Integer> observableObservable = Observable.create(subscriber -> {
-            subscriber.onNext(random.nextInt(46) + 1);
-            subscriber.onCompleted();
-        });
-        observableObservable.subscribeOn(Schedulers.io()).repeat(10000).compose(injectProgress()).subscribe(new Subscriber<Integer>() {
-            @Override
-            public void onCompleted() {
-
-                publishSubject.onNext(data);
-                System.out.println("data print" + data);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(Integer integer) {
-                if (data.containsKey(integer)) {
-                    data.put(integer, data.get(integer) + 1);
-                } else {
-                    data.put(integer, 1);
-                }
-            }
-        });
-
-
-        publishSubject.subscribe(integerIntegerHashMap -> {
-            List<Map.Entry<Integer, Integer>> list = new LinkedList<Map.Entry<Integer, Integer>>(integerIntegerHashMap.entrySet());
-            Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-                public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-                    return (o1.getValue()).compareTo(o2.getValue());
-                }
-            });
-
-            ArrayList<Integer> result = new ArrayList<Integer>();
-            for (Map.Entry<Integer, Integer> entry : list) {
-                result.add(entry.getKey());
-            }
-
-            Observable.from(result).take(6).toList().observeOn(AndroidSchedulers.mainThread()).subscribe(integers ->
-                    numbertext.append("\n"+new Gson().toJson(integers)));
-
-
-        });
-
-
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         init();
         onInjectTasteFragment();
         githubListPresenter.attach(this);
@@ -152,7 +96,7 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     }
 
     public void onInjectTasteFragment() {
-        ((ApplicationComponent) SampleApplication.getApplicationComponent()).addActivityComponent(new ActivityModoule(parentActivity)).addFragmentModule(new FragmentMoudule(this)).inject(this);
+        ((BaseMvpActivity)getActivity()).getActivityComponent().addFragmentComponent(new FragmentMoudule(this)).inject(this);
     }
 
 
@@ -196,12 +140,30 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     }
 
 
+    @OnClick(R.id.btn02)
+    public void selectAll(){
+        githubListPresenter.getUserInfo();
+    }
+    @OnClick(R.id.btn03)
+    public void clickSelectWhere(){
+        select("1483064327659//class");
+    }
+
+    public void select(String userclass){
+        githubListPresenter.selectUserInfo(userclass);
+    }
     @Override
     public void showData(LocationInfo data) {
         Loading = false;
         searchItems.addAll(data.getSearchItems().getPlaces());
         TasteRecyclerAdapter tasteRecyclerAdapter = (TasteRecyclerAdapter) recyclerView.getAdapter();
         tasteRecyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getUserInfo(List<UserInfo> userInfoList) {
+
+        Log.e("userInfoList",new Gson().toJson(userInfoList));
     }
 
     @Override

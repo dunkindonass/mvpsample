@@ -1,25 +1,23 @@
 package kr.co.mvp.dagger2.sample.mvp.views;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.SampleApplication;
 import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
@@ -28,22 +26,30 @@ import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.functions.Func0;
-import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
 
-import static android.R.id.list;
-import static rx.Observable.combineLatest;
-
 public class MainActivity extends BaseMvpActivity {
+
+
+    @Bind(R.id.container_layout)
+    FrameLayout containerLayout;
+    @Bind(R.id.btn01)
+    Button btn01;
+    @Bind(R.id.btn02)
+    Button btn02;
+    @Bind(R.id.btn03)
+    Button btn03;
+    @Bind(R.id.activity_main)
+    LinearLayout activityMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         init();
         getDate();
@@ -54,14 +60,13 @@ public class MainActivity extends BaseMvpActivity {
     }
 
 
-    public void getDate(){
-        long currentDate=System.currentTimeMillis();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("F");
-        String result=simpleDateFormat.format(new Date(currentDate));
-        Log.e("result::",result);
-
+    public void getDate() {
+        long currentDate = System.currentTimeMillis();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("F");
+        String result = simpleDateFormat.format(new Date(currentDate));
 
     }
+
     public void rxLimitTest() {
         Random random = new Random();
         Observable<Integer> integerObservable = Observable.create(subscriber -> subscriber.onNext(random.nextInt(46) + 1));
@@ -109,12 +114,12 @@ public class MainActivity extends BaseMvpActivity {
                 }
             });
 
-            ArrayList<Integer> result=new ArrayList<Integer>();
+            ArrayList<Integer> result = new ArrayList<Integer>();
             for (Map.Entry<Integer, Integer> entry : list) {
                 result.add(entry.getKey());
             }
 
-            Observable.from(result).take(6).toList().subscribe(integers ->  System.out.println(integers));
+            Observable.from(result).take(6).toList().subscribe(integers -> System.out.println(integers));
 
 
         });
@@ -142,8 +147,5 @@ public class MainActivity extends BaseMvpActivity {
         });
     }
 
-    public void onInjectMainActivity() {
-        ((ApplicationComponent) SampleApplication.getApplicationComponent()).addActivityComponent(new ActivityModoule(this)).inject(this);
-    }
 
 }

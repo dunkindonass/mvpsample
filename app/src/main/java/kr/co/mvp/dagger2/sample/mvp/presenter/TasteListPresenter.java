@@ -2,6 +2,8 @@ package kr.co.mvp.dagger2.sample.mvp.presenter;
 
 import android.content.res.Resources;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.inject.Inject;
 
 import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
@@ -15,38 +17,7 @@ import rx.schedulers.Schedulers;
  * Created by 8454 on 2016-08-10.
  */
 
-public class TasteListPresenter extends BasePresenter<TasteListView> {
+public class TasteListPresenter extends BasePresenter {
 
-    @Inject
-    Resources resources;
-
-    @Inject
-    NetworkApi networkApi;
-
-    @Inject
-    TasteListPresenter() {
-    }
-
-    public void requestGithubData(int idx) {
-
-        Observable<LocationInfo> locationSearch = networkApi.getLocation("맛집", "", "OUyULY", "LTr_CV", "1", idx + "", "15", "wcong", "ko", "android", "-1", "true", "1", "3.9.13");
-        locationSearch.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).compose(view().injectProgress()).subscribe(new Subscriber<LocationInfo>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onNext(LocationInfo s) {
-                view().showData(s);
-            }
-        });
-
-    }
 
 }
