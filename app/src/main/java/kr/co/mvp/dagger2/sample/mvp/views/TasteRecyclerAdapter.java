@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.mvp.model.Place;
 
@@ -30,6 +32,7 @@ public class TasteRecyclerAdapter extends RecyclerView.Adapter<TasteRecyclerAdap
 
     private ItemClick itemClickCallback;
 
+    public TasteRecyclerAdapter(){}
     public TasteRecyclerAdapter(Context context, ArrayList<Place> searchItems) {
         this.searchItems = searchItems;
         this.context = context;

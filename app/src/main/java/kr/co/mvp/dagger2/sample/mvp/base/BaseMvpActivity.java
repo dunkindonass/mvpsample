@@ -2,6 +2,7 @@ package kr.co.mvp.dagger2.sample.mvp.base;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
 import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.dagger.utils.ProgressDialogProvider;
+import kr.co.mvp.dagger2.sample.nondagger.BaseFragment;
 import kr.co.mvp.dagger2.sample.utils.StringUtils;
 import rx.Observable;
 
@@ -71,7 +73,8 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
             CURRENTTAG = fragment.getFragmentTag();
 
             fragment.setRootFragment(root);
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
 
             if (data != null) {
                 fragment.setArguments(data);
@@ -81,6 +84,30 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
 
             ft.commitAllowingStateLoss();
             currentFragment = fragment;
+        } catch (Exception ee) {
+            ee.printStackTrace();
+        }
+
+    }
+
+    public void onCallFragment(BaseFragment fragment, String root, Bundle data) {
+
+        try {
+            CURRENTTAG = fragment.getFragmentTag();
+
+            fragment.setRootFragment(root);
+
+            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+            if (data != null) {
+                fragment.setArguments(data);
+            }
+            ft.replace(R.id.container_layout, fragment, fragment.getFragmentTag());
+            ft.addToBackStack(fragment.getFragmentTag());
+
+            ft.commitAllowingStateLoss();
+            //currentFragment = fragment;
+
         } catch (Exception ee) {
             ee.printStackTrace();
         }

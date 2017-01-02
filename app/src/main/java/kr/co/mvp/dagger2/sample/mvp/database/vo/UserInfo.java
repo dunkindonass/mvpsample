@@ -46,6 +46,7 @@ public class UserInfo {
 
     @DatabaseField(unique = true,id = true)
     private String userid;
+
     @DatabaseField
     private String username;
     @DatabaseField

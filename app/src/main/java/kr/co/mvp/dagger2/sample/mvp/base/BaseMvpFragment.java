@@ -4,23 +4,23 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+
+import com.trello.rxlifecycle.components.RxFragment;
 
 import javax.inject.Inject;
 
-import kr.co.mvp.dagger2.sample.SampleApplication;
-import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
-import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
 import kr.co.mvp.dagger2.sample.dagger.module.FragmentMoudule;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.dagger.utils.ProgressDialogProvider;
+import kr.co.mvp.dagger2.sample.utils.Subscriptionutil;
 import rx.Observable;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by 8454 on 2016-08-16.
  */
 
-public abstract class BaseMvpFragment extends Fragment implements BaseMvpView {
+public abstract class BaseMvpFragment extends RxFragment implements BaseMvpView {
 
     @Inject
     protected Activity parentActivity;
@@ -31,6 +31,8 @@ public abstract class BaseMvpFragment extends Fragment implements BaseMvpView {
     protected ProgressDialogProvider progressDialogProvider;
 
     protected String RootFragment;
+
+    private CompositeSubscription subscriptions=new CompositeSubscription();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public abstract class BaseMvpFragment extends Fragment implements BaseMvpView {
 
     @Override
     public <T> Observable.Transformer<T, T> bind() {
-        return null;
+        return observable -> observable.compose(bindToLifecycle()).lift(Subscriptionutil.composite(subscriptions)) ;
     }
 
     @Override

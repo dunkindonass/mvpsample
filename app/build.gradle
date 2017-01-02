@@ -59,7 +59,13 @@ dependencies {
     compile 'com.google.dagger:dagger:2.2'
     apt 'com.google.dagger:dagger-compiler:2.2'
     provided 'javax.annotation:jsr250-api:1.0'
+    compile group: 'com.j256.ormlite', name: 'ormlite-android', version: '4.48'
     testApt 'com.google.dagger:dagger-compiler:2.0.2'
+
+    //rxlifecycle
+    compile 'com.trello:rxlifecycle:1.0'
+    compile 'com.trello:rxlifecycle-android:1.0'
+    compile 'com.trello:rxlifecycle-components:1.0'
 
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.android.support:cardview-v7:+'
@@ -67,6 +73,5 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.android.support:support-v4:+'
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-android
-    compile group: 'com.j256.ormlite', name: 'ormlite-android', version: '4.48'
 
 }

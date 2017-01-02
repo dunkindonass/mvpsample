@@ -15,23 +15,32 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.SampleApplication;
 import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
 import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
+import kr.co.mvp.dagger2.sample.nondagger.TasteListNonDaggerfragment;
 import rx.Observable;
+import rx.Scheduler;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
 
 public class MainActivity extends BaseMvpActivity {
+
+
+
 
 
     @Bind(R.id.container_layout)
@@ -53,12 +62,14 @@ public class MainActivity extends BaseMvpActivity {
 
         init();
         getDate();
+
+
+
     }
 
     public void init() {
         onCallFragment(new TasteListFragment(), ROOTFRAGMENT, null);
     }
-
 
     public void getDate() {
         long currentDate = System.currentTimeMillis();
@@ -67,85 +78,7 @@ public class MainActivity extends BaseMvpActivity {
 
     }
 
-    public void rxLimitTest() {
-        Random random = new Random();
-        Observable<Integer> integerObservable = Observable.create(subscriber -> subscriber.onNext(random.nextInt(46) + 1));
 
-
-        Subscription subscription = new CompositeSubscription();
-
-        HashMap<Integer, Integer> data = new HashMap<>();
-
-        //Observable.interval(500, TimeUnit.MICROSECONDS).flatMap(aLong -> Observable.just(random.nextInt(46))).subscribe(integer -> System.out.println(integer));
-        PublishSubject<HashMap<Integer, Integer>> publishSubject = PublishSubject.create();
-        Observable<Integer> observableObservable = Observable.create(subscriber -> {
-            subscriber.onNext(random.nextInt(46) + 1);
-            subscriber.onCompleted();
-        });
-        observableObservable.subscribeOn(Schedulers.io()).repeat(10000).subscribe(new Subscriber<Integer>() {
-            @Override
-            public void onCompleted() {
-
-                publishSubject.onNext(data);
-                System.out.println("data print" + data);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(Integer integer) {
-                if (data.containsKey(integer)) {
-                    data.put(integer, data.get(integer) + 1);
-                } else {
-                    data.put(integer, 1);
-                }
-            }
-        });
-
-
-        publishSubject.subscribe(integerIntegerHashMap -> {
-            List<Map.Entry<Integer, Integer>> list = new LinkedList<Map.Entry<Integer, Integer>>(integerIntegerHashMap.entrySet());
-            Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-                public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-                    return (o1.getValue()).compareTo(o2.getValue());
-                }
-            });
-
-            ArrayList<Integer> result = new ArrayList<Integer>();
-            for (Map.Entry<Integer, Integer> entry : list) {
-                result.add(entry.getKey());
-            }
-
-            Observable.from(result).take(6).toList().subscribe(integers -> System.out.println(integers));
-
-
-        });
-
-    }
-
-
-    public void testBehavierSubject01() {
-        BehaviorSubject<String> subject = BehaviorSubject.create();
-        subject.filter(text -> !text.equals("aaa")).subscribe(new Subscriber<String>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(String s) {
-
-            }
-        });
-    }
 
 
 }

@@ -1,4 +1,4 @@
-package kr.co.mvp.dagger2.sample.mvp.presenter;
+package kr.co.mvp.dagger2.sample.mvp.base;
 
 
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpView;

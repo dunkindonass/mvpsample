@@ -167,6 +167,17 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     }
 
     @Override
+    public void setRecyclerView(TasteRecyclerAdapter tasteRecyclerAdapter) {
+
+        if(recyclerView.getAdapter()==null){
+            recyclerView.setAdapter(tasteRecyclerAdapter);
+        }else{
+            tasteRecyclerAdapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
     protected String getFragmentTag() {
         return "TasteListFragments";
     }

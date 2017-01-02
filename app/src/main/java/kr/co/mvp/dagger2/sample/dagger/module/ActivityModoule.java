@@ -6,6 +6,8 @@ import dagger.Module;
 import dagger.Provides;
 import kr.co.mvp.dagger2.sample.dagger.PerActivity;
 import kr.co.mvp.dagger2.sample.dagger.utils.ProgressDialogProvider;
+import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListPresenterImpl;
+import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListView;
 
 /**
  * Created by 8454 on 2016-08-09.
@@ -31,4 +33,6 @@ public class ActivityModoule {
     public ProgressDialogProvider provideProgress(Activity activity){
         return new ProgressDialogProvider(activity);
     }
+
+
 }

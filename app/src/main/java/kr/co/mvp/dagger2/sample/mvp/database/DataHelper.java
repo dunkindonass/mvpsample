@@ -47,6 +47,7 @@ public class DataHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, UserInfo.class, true);
+
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             Log.e(DataHelper.class.getName(),

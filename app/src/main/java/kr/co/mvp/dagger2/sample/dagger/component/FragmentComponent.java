@@ -1,6 +1,7 @@
 package kr.co.mvp.dagger2.sample.dagger.component;
 
-import android.support.v4.app.Fragment;
+
+import android.app.Fragment;
 
 import javax.inject.Singleton;
 
@@ -25,5 +26,6 @@ public interface FragmentComponent {
 
     void inject(BaseMvpFragment baseMvpFragment);
     void inject(TasteListFragment tasteListFragment);
+
 
 }
