@@ -37,8 +37,8 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
     @Inject
     protected PreferenceUtil PREFERENCE;
 
-    @Inject
-    protected ProgressDialogProvider progressDialogProvider;
+   /* @Inject
+    protected ProgressDialogProvider progressDialogProvider;*/
 
     public static final String ROOTFRAGMENT = "rootfragment";
 
@@ -46,7 +46,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        onInject();
+         onInject();
         super.onCreate(savedInstanceState);
 
     }
@@ -63,7 +63,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
 
     @Override
     public <T> Observable.Transformer<T, T> injectProgress() {
-        ProgressDialog progressDialog = progressDialogProvider.provide();
+        ProgressDialog progressDialog = new ProgressDialogProvider(this).provide();
         return observable -> observable.doOnSubscribe(progressDialog::show).doOnUnsubscribe(progressDialog::dismiss);
     }
 
@@ -124,7 +124,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
             //Rootfragment없을때
             Log.e("else", "call");
             String currentTag = currentFragment.getFragmentTag();
-            getSupportFragmentManager()
+            getFragmentManager()
                     .popBackStack(currentTag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }

@@ -19,6 +19,4 @@ public interface ActivityComponent {
     FragmentComponent addFragmentComponent(FragmentMoudule fragmentMoudule);
 
     void inject(BaseMvpActivity baseMvpActivity);
-
-    void inject(MainActivity mainActivity);
 }

@@ -1,58 +1,38 @@
 package kr.co.mvp.dagger2.sample.mvp.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.SampleApplication;
-import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
-import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
+import kr.co.mvp.dagger2.sample.dagger.component.DaggerSampleTestComponent;
+import kr.co.mvp.dagger2.sample.dagger.module.ApplicationModule;
+import kr.co.mvp.dagger2.sample.dagger.module.CommonUtilModule;
+import kr.co.mvp.dagger2.sample.dagger.module.NetworkModule;
+import kr.co.mvp.dagger2.sample.dagger.module.SampleTestVo;
+import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
-import kr.co.mvp.dagger2.sample.nondagger.TasteListNonDaggerfragment;
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
-import rx.subjects.BehaviorSubject;
-import rx.subjects.PublishSubject;
-import rx.subscriptions.CompositeSubscription;
 
 public class MainActivity extends BaseMvpActivity {
 
 
+    @Inject
+    PreferenceUtil preferenceUtil;
 
 
-
-    @Bind(R.id.container_layout)
-    FrameLayout containerLayout;
-    @Bind(R.id.btn01)
-    Button btn01;
-    @Bind(R.id.btn02)
-    Button btn02;
-    @Bind(R.id.btn03)
-    Button btn03;
-    @Bind(R.id.activity_main)
-    LinearLayout activityMain;
+    @Inject
+    SampleTestVo sampleTestVo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +40,33 @@ public class MainActivity extends BaseMvpActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        init();
-        getDate();
 
+
+
+
+        DaggerSampleTestComponent.builder().applicationComponent(SampleApplication.component(this)).build().inject(this);
+       // init();
+        getDate();
 
 
     }
 
+
+
+    @OnClick(R.id.btn01)
+    public void btnOnClick(){
+        if(preferenceUtil==null){
+            Log.e("PREFERENCE==null","call");
+        }else{
+            Log.e("PREFERENCE!=null","call");
+        }
+
+        if(sampleTestVo==null){
+            Log.e("sampleTestVo==null","call");
+        }else{
+            Log.e("sampleTestVo!=null","call");
+        }
+    }
     public void init() {
         onCallFragment(new TasteListFragment(), ROOTFRAGMENT, null);
     }
@@ -77,8 +77,6 @@ public class MainActivity extends BaseMvpActivity {
         String result = simpleDateFormat.format(new Date(currentDate));
 
     }
-
-
 
 
 }
