@@ -1,5 +1,7 @@
 package kr.co.mvp.dagger2.sample.mvp.views;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -60,6 +62,8 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     @Inject
     Resources resources;
 
+    Context context;
+
     @Inject
     TasteListPresenterImpl githubListPresenter;
 
@@ -78,6 +82,7 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.tastelistfragment, container, false);
+        context=fragmentView.getContext();
         ButterKnife.bind(this, fragmentView);
         return fragmentView;
     }
@@ -101,8 +106,8 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
 
 
     public void init() {
-        recyclerView.setAdapter(new TasteRecyclerAdapter(parentActivity, searchItems));
-        recyclerView.setLayoutManager(new LinearLayoutManager(parentActivity));
+        recyclerView.setAdapter(new TasteRecyclerAdapter(context, searchItems));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         TasteRecyclerAdapter tasteRecyclerAdapter = (TasteRecyclerAdapter) recyclerView.getAdapter();
         if (tasteRecyclerAdapter != null) {
             tasteRecyclerAdapter.setItemClickCallback(new TasteRecyclerAdapter.ItemClick() {
@@ -140,14 +145,6 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     }
 
 
-    @OnClick(R.id.btn02)
-    public void selectAll(){
-        githubListPresenter.getUserInfo();
-    }
-    @OnClick(R.id.btn03)
-    public void clickSelectWhere(){
-        select("1483064327659//class");
-    }
 
     public void select(String userclass){
         githubListPresenter.selectUserInfo(userclass);

@@ -40,14 +40,9 @@ public class MainActivity extends BaseMvpActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
-
-
-
         DaggerSampleTestComponent.builder().applicationComponent(SampleApplication.component(this)).build().inject(this);
-       // init();
-        getDate();
 
+        init();
 
     }
 
@@ -67,16 +62,12 @@ public class MainActivity extends BaseMvpActivity {
             Log.e("sampleTestVo!=null","call");
         }
     }
+
     public void init() {
         onCallFragment(new TasteListFragment(), ROOTFRAGMENT, null);
     }
 
-    public void getDate() {
-        long currentDate = System.currentTimeMillis();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("F");
-        String result = simpleDateFormat.format(new Date(currentDate));
 
-    }
 
 
 }

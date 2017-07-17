@@ -59,6 +59,7 @@ dependencies {
     compile 'com.google.dagger:dagger:2.2'
     apt 'com.google.dagger:dagger-compiler:2.2'
     provided 'javax.annotation:jsr250-api:1.0'
+
     compile group: 'com.j256.ormlite', name: 'ormlite-android', version: '4.48'
     testApt 'com.google.dagger:dagger-compiler:2.0.2'
 

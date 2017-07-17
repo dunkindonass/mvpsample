@@ -40,11 +40,10 @@ public abstract class BaseMvpFragment extends RxFragment implements BaseMvpView 
         super.onCreate(savedInstanceState);
     }
 
-    public void onFragmentInject() {
-      //  ((basemvpactivity)getactivity()).activitycomponent.addfragmentcomponent(new fragmentmoudule(this)).inject(this);
+
+    public void onFragmentInject(){
+        ((BaseMvpActivity)getActivity()).getActivityComponent().addFragmentComponent(new FragmentMoudule(this)).inject(this);
     }
-
-
 
     @Override
     public void onResume() {

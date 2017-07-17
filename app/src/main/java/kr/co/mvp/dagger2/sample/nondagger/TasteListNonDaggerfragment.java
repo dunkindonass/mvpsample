@@ -51,12 +51,9 @@ import rx.schedulers.Schedulers;
  * Created by imcheol-u on 2017. 1. 2..
  */
 
-public class TasteListNonDaggerfragment extends BaseFragment implements View.OnClickListener{
-
-
+public class TasteListNonDaggerfragment extends BaseFragment  {
 
     Context mContext;
-
 
     RecyclerView recyclerView;
 
@@ -97,9 +94,6 @@ public class TasteListNonDaggerfragment extends BaseFragment implements View.OnC
         recyclerView=(RecyclerView)getView().findViewById(R.id.recyler_view);
         numbertext=(TextView)getView().findViewById(R.id.text);
 
-        ((Button)getView().findViewById(R.id.btn)).setOnClickListener(this);
-        ((Button)getView().findViewById(R.id.btn02)).setOnClickListener(this);
-        ((Button)getView().findViewById(R.id.btn03)).setOnClickListener(this);
     }
 
     public void initRecyclerView() {
@@ -221,38 +215,5 @@ public class TasteListNonDaggerfragment extends BaseFragment implements View.OnC
         return "TasteListFragments";
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn:
-                addData();
-                break;
 
-            case R.id.btn02:
-                try {
-                    List<UserInfo> userInfos=selectAll();
-
-                    if(userInfos.size()>0){
-                        //etc logic..
-                        Log.e("userInfos::",new Gson().toJson(userInfos));
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            case R.id.btn03:
-                try {
-                    List<UserInfo> selectInfos=selectWhere("1483328479487class");
-                    if(selectInfos.size()>0){
-                        //etc logic..
-                        Log.e("userInfos::",new Gson().toJson(selectInfos));
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-        }
-    }
 }
