@@ -1,6 +1,5 @@
 package kr.co.mvp.dagger2.sample.mvp.base;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,11 +11,12 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
 import kr.co.mvp.dagger2.sample.R;
-import kr.co.mvp.dagger2.sample.SampleApplication;
 import kr.co.mvp.dagger2.sample.dagger.component.ActivityComponent;
-import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
-import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.dagger.utils.ProgressDialogProvider;
 import kr.co.mvp.dagger2.sample.nondagger.BaseFragment;
@@ -27,7 +27,10 @@ import rx.Observable;
  * Created by 8454 on 2016-08-09.
  */
 
-public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
+public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , HasFragmentInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
     protected BaseMvpFragment currentFragment;
 
@@ -45,15 +48,15 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-         onInject();
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 
     }
 
-    public void onInject() {
-        activityComponent= SampleApplication.component(this).addActivtiyComponent(new ActivityModoule(this));
-        activityComponent.inject(this);
-    }
+//    public void onInject() {
+//        activityComponent= SampleApplication.component(this).addActivtiyComponent(new ActivityModoule(this));
+//        activityComponent.inject(this);
+//    }
 
     @Override
     public <T> Observable.Transformer<T, T> bind() {
@@ -168,4 +171,8 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView {
         return activityComponent;
     }
 
+    @Override
+    public AndroidInjector<Fragment> fragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
+    }
 }

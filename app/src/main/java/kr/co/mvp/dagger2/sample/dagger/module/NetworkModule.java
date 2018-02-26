@@ -25,27 +25,23 @@ public class NetworkModule {
 
 
     @Provides
-    @Singleton
     public Converter.Factory  converterFactory(){
         return GsonConverterFactory.create();
     }
 
     @Provides
-    @Singleton
     public CallAdapter.Factory callAdapterFactory() {
         return RxJavaCallAdapterFactory.create();
     }
 
 
     @Provides
-    @Singleton
     public OkHttpClient okHttpClient(){
         return new OkHttpClient.Builder().addInterceptor(new OkHttpInterceptor()).build();
     }
 
 
     @Provides
-    @Singleton
     public Retrofit retrofit(OkHttpClient client, Converter.Factory convertFactory, CallAdapter.Factory callAdapterFactory){
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
@@ -59,7 +55,6 @@ public class NetworkModule {
 
 
     @Provides
-    @Singleton
     public NetworkApi kumonNetworkService(Retrofit retrofit){
         return retrofit.create(NetworkApi.class);
     }

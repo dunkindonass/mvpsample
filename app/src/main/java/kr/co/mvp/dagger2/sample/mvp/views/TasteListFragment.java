@@ -1,6 +1,5 @@
 package kr.co.mvp.dagger2.sample.mvp.views;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -15,27 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.j256.ormlite.stmt.Where;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import dagger.android.AndroidInjection;
 import kr.co.mvp.dagger2.sample.R;
-import kr.co.mvp.dagger2.sample.SampleApplication;
-import kr.co.mvp.dagger2.sample.dagger.component.ApplicationComponent;
-import kr.co.mvp.dagger2.sample.dagger.module.ActivityModoule;
-import kr.co.mvp.dagger2.sample.dagger.module.DataModule;
 import kr.co.mvp.dagger2.sample.dagger.module.FragmentMoudule;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
@@ -44,13 +32,6 @@ import kr.co.mvp.dagger2.sample.mvp.model.LocationInfo;
 import kr.co.mvp.dagger2.sample.mvp.model.Place;
 import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListPresenterImpl;
 import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListView;
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subjects.PublishSubject;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by 8454 on 2016-08-16.
@@ -58,19 +39,19 @@ import rx.subscriptions.CompositeSubscription;
 
 public class TasteListFragment extends BaseMvpFragment implements TasteListView {
 
-
+//
     @Inject
     Resources resources;
-
+//
     Context context;
-
+//
     @Inject
     TasteListPresenterImpl githubListPresenter;
 
-    @Bind(R.id.recyler_view)
+
+    @BindView(R.id.recyler_view)
     RecyclerView recyclerView;
-    @Bind(R.id.text)
-    TextView numbertext;
+
 
     private ArrayList<Place> searchItems = new ArrayList<>();
     private int index = 1;
@@ -87,22 +68,22 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
         return fragmentView;
     }
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
 
         init();
-        onInjectTasteFragment();
         githubListPresenter.attach(this);
         githubListPresenter.requestGithubData(index);
     }
 
-    public void onInjectTasteFragment() {
-        ((BaseMvpActivity)getActivity()).getActivityComponent().addFragmentComponent(new FragmentMoudule(this)).inject(this);
-    }
 
 
     public void init() {
@@ -114,7 +95,7 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
                 @Override
                 public void callWebView(String url) {
                     if (url == null || url.isEmpty()) {
-                        Toast.makeText(parentActivity, resources.getString(R.string.weblink_blank), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parentActivity, getResources().getString(R.string.weblink_blank), Toast.LENGTH_SHORT).show();
                     } else {
                         Bundle bundle = new Bundle();
                         bundle.putString("URL", url);

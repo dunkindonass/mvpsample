@@ -1,38 +1,28 @@
 package kr.co.mvp.dagger2.sample.mvp.views;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
 import kr.co.mvp.dagger2.sample.R;
-import kr.co.mvp.dagger2.sample.SampleApplication;
-import kr.co.mvp.dagger2.sample.dagger.component.DaggerSampleTestComponent;
-import kr.co.mvp.dagger2.sample.dagger.module.ApplicationModule;
-import kr.co.mvp.dagger2.sample.dagger.module.CommonUtilModule;
-import kr.co.mvp.dagger2.sample.dagger.module.NetworkModule;
-import kr.co.mvp.dagger2.sample.dagger.module.SampleTestVo;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
 
 public class MainActivity extends BaseMvpActivity {
 
+    @Inject
+    DispatchingAndroidInjector<Fragment> activityDispatchingAndroidInjector;
 
     @Inject
     PreferenceUtil preferenceUtil;
-
-
-    @Inject
-    SampleTestVo sampleTestVo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,27 +30,15 @@ public class MainActivity extends BaseMvpActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        DaggerSampleTestComponent.builder().applicationComponent(SampleApplication.component(this)).build().inject(this);
-
         init();
-
     }
 
 
-
     @OnClick(R.id.btn01)
-    public void btnOnClick(){
-        if(preferenceUtil==null){
-            Log.e("PREFERENCE==null","call");
-        }else{
-            Log.e("PREFERENCE!=null","call");
-        }
+    public void btnOnClick() {
+        Log.e("onClick","clcik");
 
-        if(sampleTestVo==null){
-            Log.e("sampleTestVo==null","call");
-        }else{
-            Log.e("sampleTestVo!=null","call");
-        }
+
     }
 
     public void init() {
@@ -68,6 +46,8 @@ public class MainActivity extends BaseMvpActivity {
     }
 
 
-
-
+    @Override
+    public AndroidInjector<Fragment> fragmentInjector() {
+        return activityDispatchingAndroidInjector;
+    }
 }

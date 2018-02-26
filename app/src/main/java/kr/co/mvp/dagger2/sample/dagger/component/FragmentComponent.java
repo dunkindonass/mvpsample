@@ -18,8 +18,8 @@ import kr.co.mvp.dagger2.sample.mvp.views.TasteListFragment;
 /**
  * Created by 8454 on 2016-08-09.
  */
-@PerFragment
-@Subcomponent(modules = {FragmentMoudule.class})
+//@PerFragment
+//@Subcomponent(modules = {FragmentMoudule.class})
 public interface FragmentComponent {
 
     Fragment fragment();

@@ -26,7 +26,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.mvp.dagger2.sample.R;

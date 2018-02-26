@@ -15,7 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
@@ -26,7 +26,7 @@ import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
 
 public class TasteWebFragment extends BaseMvpFragment {
 
-    @Bind(R.id.webview)
+    @BindView(R.id.webview)
     WebView webView;
 
     String URL;

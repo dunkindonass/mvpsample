@@ -1,15 +1,20 @@
 package kr.co.mvp.dagger2.sample.mvp.base;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 
 import com.trello.rxlifecycle.components.RxFragment;
 
 import javax.inject.Inject;
 
-import kr.co.mvp.dagger2.sample.dagger.module.FragmentMoudule;
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.dagger.utils.ProgressDialogProvider;
 import kr.co.mvp.dagger2.sample.utils.Subscriptionutil;
@@ -20,7 +25,10 @@ import rx.subscriptions.CompositeSubscription;
  * Created by 8454 on 2016-08-16.
  */
 
-public abstract class BaseMvpFragment extends RxFragment implements BaseMvpView {
+public abstract class BaseMvpFragment extends RxFragment implements BaseMvpView,HasFragmentInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     @Inject
     protected Activity parentActivity;
@@ -36,14 +44,11 @@ public abstract class BaseMvpFragment extends RxFragment implements BaseMvpView 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        onFragmentInject();
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
     }
 
 
-    public void onFragmentInject(){
-        ((BaseMvpActivity)getActivity()).getActivityComponent().addFragmentComponent(new FragmentMoudule(this)).inject(this);
-    }
 
     @Override
     public void onResume() {
@@ -73,4 +78,8 @@ public abstract class BaseMvpFragment extends RxFragment implements BaseMvpView 
         return RootFragment;
     }
 
+    @Override
+    public AndroidInjector<Fragment> fragmentInjector() {
+        return dispatchingAndroidInjector;
+    }
 }

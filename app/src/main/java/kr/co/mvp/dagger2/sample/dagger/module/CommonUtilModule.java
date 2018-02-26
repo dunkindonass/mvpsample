@@ -1,13 +1,17 @@
 package kr.co.mvp.dagger2.sample.dagger.module;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.android.AndroidInjectionModule;
 import kr.co.mvp.dagger2.sample.SampleApplication;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
+import kr.co.mvp.dagger2.sample.mvp.database.DataHelper;
 
 /**
  * Created by 8454 on 2016-08-10.
@@ -15,15 +19,17 @@ import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 
 @Module
 public class CommonUtilModule {
-    Context context;
 
-    public CommonUtilModule(SampleApplication application) {
-        this.context = application.getApplicationContext();
+    @Provides
+    @Singleton
+    public PreferenceUtil providePerferenceUtil(SampleApplication context) {
+        return new PreferenceUtil(context);
     }
 
     @Provides
     @Singleton
-    public PreferenceUtil providePerferenceUtil() {
-        return new PreferenceUtil(context);
+    DataHelper provideDatahelper(SampleApplication context) {
+        return new DataHelper(context);
     }
+
 }

@@ -11,16 +11,4 @@
         android:layout_marginTop="10px"
         android:background="#dfdfdf" />
 
-
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:background="#ffffff"
-        android:textSize="@dimen/px20"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:visibility="gone"
-        android:layout_height="wrap_content" />
-
 </LinearLayout>

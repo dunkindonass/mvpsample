@@ -20,9 +20,4 @@ public class DataModule {
 
 
 
-    @Provides
-    @PerActivity
-    DataHelper provideDatahelper(Activity activity) {
-        return new DataHelper(activity);
-    }
 }
