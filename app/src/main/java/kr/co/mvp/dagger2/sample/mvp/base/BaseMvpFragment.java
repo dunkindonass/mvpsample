@@ -3,6 +3,7 @@ package kr.co.mvp.dagger2.sample.mvp.base;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -31,7 +32,7 @@ public abstract class BaseMvpFragment extends RxFragment implements BaseMvpView,
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     @Inject
-    protected Activity parentActivity;
+    protected Context parentActivity;
 
     @Inject
     protected PreferenceUtil PREFERENCE;

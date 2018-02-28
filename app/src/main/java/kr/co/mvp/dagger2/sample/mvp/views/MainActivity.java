@@ -1,6 +1,7 @@
 package kr.co.mvp.dagger2.sample.mvp.views;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -33,19 +34,15 @@ public class MainActivity extends BaseMvpActivity {
         init();
     }
 
+    public void init() {
+        onCallFragment(R.id.container_layout,new TasteListFragment(), ROOTFRAGMENT);
+    }
+
 
     @OnClick(R.id.btn01)
-    public void btnOnClick() {
-        Log.e("onClick","clcik");
-
+    public void btnClick(){
 
     }
-
-    public void init() {
-        onCallFragment(new TasteListFragment(), ROOTFRAGMENT, null);
-    }
-
-
     @Override
     public AndroidInjector<Fragment> fragmentInjector() {
         return activityDispatchingAndroidInjector;

@@ -1,13 +1,14 @@
 package kr.co.mvp.dagger2.sample.dagger.module;
 
 import android.app.Activity;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import android.content.Context;
+import android.content.res.Resources;
 
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import kr.co.mvp.dagger2.sample.dagger.PerActivity;
+import kr.co.mvp.dagger2.sample.dagger.utils.ProgressDialogProvider;
 
 /**
  * Created by a8454 on 2018. 2. 26..
@@ -16,16 +17,25 @@ import kr.co.mvp.dagger2.sample.dagger.PerActivity;
 
 @Module
 public abstract class BaseActivityModule {
-//
-//    @Binds
-//    @PerActivity
-//    abstract FragmentActivity fragmentActivity(FragmentActivity activity);
+
+    @Binds
+    @PerActivity
+    abstract Context activityContext(Activity activity);
+
+    @Provides
+    @PerActivity
+    static ProgressDialogProvider provideProgress(Context context){
+        return new ProgressDialogProvider(context);
+    }
+
+    @Provides
+    @PerActivity
+    static Resources resources(Context context){
+        return context.getApplicationContext().getResources();
+
+    }
 
 
-//    @Provides
-//    @PerActivity
-//    static FragmentManager activityFragmentmanager(FragmentActivity activity){
-//        return activity.getSupportFragmentManager();
-//    }
+
 
 }

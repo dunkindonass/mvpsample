@@ -99,7 +99,7 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
                     } else {
                         Bundle bundle = new Bundle();
                         bundle.putString("URL", url);
-                        ((BaseMvpActivity) parentActivity).onCallFragment(new TasteWebFragment(), null, bundle);
+                        ((BaseMvpActivity) parentActivity).onCallFragment(R.id.container_layout,new TasteWebFragment(), null, bundle);
                     }
 
                 }
@@ -125,11 +125,10 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
         githubListPresenter.requestGithubData(index);
     }
 
-
-
     public void select(String userclass){
         githubListPresenter.selectUserInfo(userclass);
     }
+
     @Override
     public void showData(LocationInfo data) {
         Loading = false;

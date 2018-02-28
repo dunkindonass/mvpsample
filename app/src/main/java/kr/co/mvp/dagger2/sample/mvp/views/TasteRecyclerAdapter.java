@@ -52,9 +52,11 @@ public class TasteRecyclerAdapter extends RecyclerView.Adapter<TasteRecyclerAdap
         holder.nameTextView.setText(searchItems.get(position).getName());
         holder.descriptionTextView.setText(searchItems.get(position).getAddress() + " " + searchItems.get(position).getStreetNameAddress());
         holder.cateTextView.setText(searchItems.get(position).getCategory().get(0));
+
         if (searchItems.get(position).getCategory().size() > 1) {
             holder.cateTextView.append("/" + searchItems.get(position).getCategory().get(1));
         }
+
         holder.telTextview.setText(searchItems.get(position).getPrimaryPhone());
         Glide.with(context).load(Uri.parse(searchItems.get(position).getImageLink())).placeholder(R.drawable.noimage).into(holder.thumbview);
         holder.containLayout.setOnClickListener((view) -> itemClickCallback.callWebView(searchItems.get(position).getWebLink()));

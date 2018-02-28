@@ -6,6 +6,9 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
+import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
@@ -16,7 +19,6 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
 import kr.co.mvp.dagger2.sample.R;
-import kr.co.mvp.dagger2.sample.dagger.component.ActivityComponent;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.dagger.utils.ProgressDialogProvider;
 import kr.co.mvp.dagger2.sample.nondagger.BaseFragment;
@@ -39,12 +41,10 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , H
     @Inject
     protected PreferenceUtil PREFERENCE;
 
-   /* @Inject
-    protected ProgressDialogProvider progressDialogProvider;*/
+    @Inject
+    protected ProgressDialogProvider progressDialogProvider;
 
     public static final String ROOTFRAGMENT = "rootfragment";
-
-    protected ActivityComponent activityComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +65,18 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , H
 
     @Override
     public <T> Observable.Transformer<T, T> injectProgress() {
-        ProgressDialog progressDialog = new ProgressDialogProvider(this).provide();
+        ProgressDialog progressDialog = progressDialogProvider.provide();
         return observable -> observable.doOnSubscribe(progressDialog::show).doOnUnsubscribe(progressDialog::dismiss);
     }
+    public void onCallFragment(@IdRes int layoutId, BaseMvpFragment fragment){
+        onCallFragment(layoutId,fragment,null,null);
+    }
 
-    public void onCallFragment(BaseMvpFragment fragment, String root, Bundle data) {
+    public void onCallFragment(@IdRes int layoutId, BaseMvpFragment fragment, String root){
+        onCallFragment(layoutId,fragment,root,null);
+    }
+
+    public void onCallFragment(@IdRes int layoutId, BaseMvpFragment fragment, String root, Bundle data) {
 
         try {
             CURRENTTAG = fragment.getFragmentTag();
@@ -81,7 +88,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , H
             if (data != null) {
                 fragment.setArguments(data);
             }
-            ft.replace(R.id.container_layout, fragment, fragment.getFragmentTag());
+            ft.replace(layoutId, fragment, fragment.getFragmentTag());
             ft.addToBackStack(fragment.getFragmentTag());
 
             ft.commitAllowingStateLoss();
@@ -92,7 +99,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , H
 
     }
 
-    public void onCallFragment(BaseFragment fragment, String root, Bundle data) {
+    public void onCallFragment(@IdRes int layoutId,BaseFragment fragment, String root, Bundle data) {
 
         try {
             CURRENTTAG = fragment.getFragmentTag();
@@ -104,7 +111,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , H
             if (data != null) {
                 fragment.setArguments(data);
             }
-            ft.replace(R.id.container_layout, fragment, fragment.getFragmentTag());
+            ft.replace(layoutId, fragment, fragment.getFragmentTag());
             ft.addToBackStack(fragment.getFragmentTag());
 
             ft.commitAllowingStateLoss();
@@ -153,10 +160,7 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , H
             });
             alert.setMessage("exit app?");
             alert.show();
-         /*   KumonCommonPopup kumonCommonPopup = new KumonCommonPopup(this, TWOBUTTON);
-            kumonCommonPopup.setPopupText(getResources().getString(R.string.app_exit_question));
-            kumonCommonPopup.setListener(null, () -> finish());
-            kumonCommonPopup.DialogShow();*/
+
         } else {
             popupStack(currentFragment);
         }
@@ -167,9 +171,6 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , H
         this.currentFragment = fragment;
     }
 
-    public ActivityComponent getActivityComponent(){
-        return activityComponent;
-    }
 
     @Override
     public AndroidInjector<Fragment> fragmentInjector() {

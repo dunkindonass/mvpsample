@@ -17,10 +17,12 @@ import kr.co.mvp.dagger2.sample.dagger.module.NetworkModule;
 
 @Singleton
 @Component(modules = {AndroidInjectionModule.class, ApplicationModule.class, CommonUtilModule.class, NetworkModule.class})
+
     public interface ApplicationComponent extends AndroidInjector<SampleApplication> {
 
     @Component.Builder
     abstract class Builder extends AndroidInjector.Builder<SampleApplication> {
+
     }
 
 }

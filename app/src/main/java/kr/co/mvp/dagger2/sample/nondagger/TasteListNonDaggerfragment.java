@@ -108,7 +108,7 @@ public class TasteListNonDaggerfragment extends BaseFragment  {
                     } else {
                         Bundle bundle = new Bundle();
                         bundle.putString("URL", url);
-                        ((BaseMvpActivity) parentActivity).onCallFragment(new TasteWebFragment(), null, bundle);
+                        ((BaseMvpActivity) parentActivity).onCallFragment(R.id.container_layout,new TasteWebFragment(), null, bundle);
                     }
 
                 }

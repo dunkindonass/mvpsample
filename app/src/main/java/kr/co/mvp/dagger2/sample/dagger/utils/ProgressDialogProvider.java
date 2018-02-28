@@ -2,6 +2,7 @@ package kr.co.mvp.dagger2.sample.dagger.utils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.res.Resources;
 
 import javax.inject.Inject;
@@ -13,19 +14,16 @@ import kr.co.mvp.dagger2.sample.R;
  */
 
 public class ProgressDialogProvider {
-    private Activity activity;
+    private Context context;
 
-    @Inject
-    Resources resources;
-
-    public ProgressDialogProvider(Activity activity) {
-        this.activity = activity;
+    public ProgressDialogProvider(Context cxt) {
+        this.context = cxt;
     }
 
     public ProgressDialog provide() {
-        ProgressDialog progressDialog = new ProgressDialog(activity);
+        ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
-        progressDialog.setMessage(activity.getString(R.string.loading_string));
+        progressDialog.setMessage(context.getString(R.string.loading_string));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         return progressDialog;
     }

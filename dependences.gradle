@@ -1,0 +1,9 @@
+ext{
+
+    kotlinVersion = "1.2.0"
+
+    //Gradle plugin
+    androidPluginVersion = "3.0.1"
+    daggerVersion = '2.12'
+
+}

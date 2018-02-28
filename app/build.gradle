@@ -45,6 +45,7 @@ buildscript {
 
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // test
     testCompile 'junit:junit:4.12'
@@ -58,11 +59,17 @@ dependencies {
 
     implementation 'com.google.dagger:dagger:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     implementation 'com.google.dagger:dagger-android-support:2.11'
 
-    implementation group: 'com.j256.ormlite', name: 'ormlite-android', version: '4.48'
 
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    implementation group: 'com.j256.ormlite', name: 'ormlite-android', version: '4.48'
 
     //rxlifecycle
     implementation 'com.trello:rxlifecycle:1.0'

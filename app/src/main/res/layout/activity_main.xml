@@ -9,22 +9,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
-        android:text="MVP and Dagger2 Sample"
+        android:text="MVP and Dagger2.12 Sample"
         android:textSize="20px"
         android:textStyle="bold" />
-
 
     <Button
         android:id="@+id/btn01"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="버튼" />
-
+        android:layout_height="wrap_content" android:text="메인엑티비티"/>
     <FrameLayout
         android:id="@+id/container_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/btn01" />
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
