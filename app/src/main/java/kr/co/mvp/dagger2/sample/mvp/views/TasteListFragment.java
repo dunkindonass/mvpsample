@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dagger.android.AndroidInjection;
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.dagger.module.FragmentMoudule;
@@ -39,12 +41,13 @@ import kr.co.mvp.dagger2.sample.mvp.presenter.TasteListView;
 
 public class TasteListFragment extends BaseMvpFragment implements TasteListView {
 
-//
     @Inject
     Resources resources;
-//
     Context context;
-//
+
+    @BindView(R.id.input_text)
+    EditText inputText;
+
     @Inject
     TasteListPresenterImpl githubListPresenter;
 
@@ -81,9 +84,19 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
 
         init();
         githubListPresenter.attach(this);
-        githubListPresenter.requestGithubData(index);
+        //githubListPresenter.requestGithubData(index);
     }
 
+
+    @OnClick(R.id.search_btn)
+    public void onSearchClick(){
+        if (inputText.getText().toString().length() == 0){
+            Toast.makeText(context, "입력하세요",Toast.LENGTH_SHORT).show();
+        }else{
+            String searchText = inputText.getText().toString();
+            githubListPresenter.requestGithubData(searchText,0);
+        }
+    }
 
 
     public void init() {
@@ -122,7 +135,13 @@ public class TasteListFragment extends BaseMvpFragment implements TasteListView 
     }
 
     public void tasteRequest() {
-        githubListPresenter.requestGithubData(index);
+        if (inputText.getText().toString().length() == 0){
+            Toast.makeText(context, "입력하세요",Toast.LENGTH_SHORT).show();
+        }else{
+            String searchText = inputText.getText().toString();
+            githubListPresenter.requestGithubData(searchText,index);
+        }
+
     }
 
     public void select(String userclass){

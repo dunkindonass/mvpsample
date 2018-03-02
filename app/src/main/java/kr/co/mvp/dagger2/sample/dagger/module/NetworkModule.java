@@ -21,7 +21,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class NetworkModule {
     final int DAUM = 0;
     final int DEV = 1;
-    private String[] BASEURL = {"http://nphone.daum.net", "http://172.16.30.55:8087"};
+    private String[] BASEURL = {"http://nphone.daum.net", "https://api.github.com"};
 
 
     @Provides

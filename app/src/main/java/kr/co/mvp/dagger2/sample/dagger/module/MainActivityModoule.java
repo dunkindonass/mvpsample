@@ -22,8 +22,6 @@ public abstract class MainActivityModoule {
     @PerActivity
     abstract Activity activityContext(MainActivity activity);
 
-
-
     @PerFragment
     @ContributesAndroidInjector(modules = FragmentMoudule.class )
     abstract TasteListFragment tasteListFragment();

@@ -78,10 +78,10 @@ public class TasteListPresenterImpl extends BasePresenter<TasteListView> {
         }
     }
 
-    public void requestGithubData(int idx) {
+    public void requestGithubData(String text,int idx) {
 
         Observable<LocationInfo> locationSearch = null;
-        locationSearch = networkApi.getLocation("new", "", "OUyULY", "LTr_CV", "1", idx + "", "15", "wcong", "ko", "android", "-1", "true", "1", "3.9.13");
+        locationSearch = networkApi.getLocation(text, "", "OUyULY", "LTr_CV", "1", idx + "", "15", "wcong", "ko", "android", "-1", "true", "1", "3.9.13");
 
         locationSearch.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .compose(view().injectProgress())
