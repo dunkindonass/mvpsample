@@ -20,7 +20,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 @Module
 public class NetworkModule {
     final int DAUM = 0;
-    final int DEV = 1;
+    final int GITHUB = 1;
     private String[] BASEURL = {"http://nphone.daum.net", "https://api.github.com"};
 
 
@@ -47,7 +47,7 @@ public class NetworkModule {
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(convertFactory)
                 .client(client)
-                .baseUrl(BASEURL[DAUM])
+                .baseUrl(BASEURL[GITHUB])
                 .addCallAdapterFactory(callAdapterFactory)
                 .build();
         return retrofit;

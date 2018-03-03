@@ -6,9 +6,7 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
-import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
@@ -18,10 +16,8 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
-import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.dagger.utils.ProgressDialogProvider;
-import kr.co.mvp.dagger2.sample.nondagger.BaseFragment;
 import kr.co.mvp.dagger2.sample.utils.StringUtils;
 import rx.Observable;
 
@@ -99,29 +95,6 @@ public class BaseMvpActivity extends FragmentActivity implements BaseMvpView , H
 
     }
 
-    public void onCallFragment(@IdRes int layoutId,BaseFragment fragment, String root, Bundle data) {
-
-        try {
-            CURRENTTAG = fragment.getFragmentTag();
-
-            fragment.setRootFragment(root);
-
-            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-            if (data != null) {
-                fragment.setArguments(data);
-            }
-            ft.replace(layoutId, fragment, fragment.getFragmentTag());
-            ft.addToBackStack(fragment.getFragmentTag());
-
-            ft.commitAllowingStateLoss();
-            //currentFragment = fragment;
-
-        } catch (Exception ee) {
-            ee.printStackTrace();
-        }
-
-    }
 
     public void popupStack(BaseMvpFragment currentFragment) {
 

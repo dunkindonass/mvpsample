@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+        <EditText
+            android:id="@+id/repo_input_text"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/repo_search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SEARCH" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/sorting_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:entries="@array/sort_array"/>
+        <Spinner
+            android:id="@+id/order_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:entries="@array/order_array"/>
+
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/github_repo_recyler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10px"
+        android:background="#dfdfdf" />
+
+</LinearLayout>

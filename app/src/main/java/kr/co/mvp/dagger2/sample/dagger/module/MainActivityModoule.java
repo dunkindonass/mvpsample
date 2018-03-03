@@ -8,8 +8,8 @@ import dagger.android.ContributesAndroidInjector;
 import kr.co.mvp.dagger2.sample.dagger.PerActivity;
 import kr.co.mvp.dagger2.sample.dagger.PerFragment;
 import kr.co.mvp.dagger2.sample.mvp.views.MainActivity;
-import kr.co.mvp.dagger2.sample.mvp.views.TasteListFragment;
-import kr.co.mvp.dagger2.sample.mvp.views.TasteWebFragment;
+import kr.co.mvp.dagger2.sample.mvp.views.fragment.GithubRepoFragment;
+import kr.co.mvp.dagger2.sample.mvp.views.fragment.GithubWebFragment;
 
 /**
  * Created by 8454 on 2016-08-09.
@@ -24,11 +24,11 @@ public abstract class MainActivityModoule {
 
     @PerFragment
     @ContributesAndroidInjector(modules = FragmentMoudule.class )
-    abstract TasteListFragment tasteListFragment();
+    abstract GithubWebFragment githubWebFragment();
 
     @PerFragment
     @ContributesAndroidInjector(modules = FragmentMoudule.class )
-    abstract TasteWebFragment tasteWebFragment();
+    abstract GithubRepoFragment githubRepoFragment();
 
 
 

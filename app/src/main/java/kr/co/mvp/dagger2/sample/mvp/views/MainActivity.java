@@ -16,6 +16,7 @@ import dagger.android.DispatchingAndroidInjector;
 import kr.co.mvp.dagger2.sample.R;
 import kr.co.mvp.dagger2.sample.dagger.utils.PreferenceUtil;
 import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpActivity;
+import kr.co.mvp.dagger2.sample.mvp.views.fragment.GithubRepoFragment;
 
 public class MainActivity extends BaseMvpActivity {
 
@@ -35,14 +36,9 @@ public class MainActivity extends BaseMvpActivity {
     }
 
     public void init() {
-        onCallFragment(R.id.container_layout,new TasteListFragment(), ROOTFRAGMENT);
+        onCallFragment(R.id.container_layout,new GithubRepoFragment(), ROOTFRAGMENT);
     }
 
-
-    @OnClick(R.id.btn01)
-    public void btnClick(){
-
-    }
     @Override
     public AndroidInjector<Fragment> fragmentInjector() {
         return activityDispatchingAndroidInjector;

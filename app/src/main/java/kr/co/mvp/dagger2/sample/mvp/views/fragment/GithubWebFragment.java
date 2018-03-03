@@ -1,4 +1,4 @@
-package kr.co.mvp.dagger2.sample.mvp.views;
+package kr.co.mvp.dagger2.sample.mvp.views.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,7 +24,7 @@ import kr.co.mvp.dagger2.sample.mvp.base.BaseMvpFragment;
  * Created by 8454 on 2016-08-16.
  */
 
-public class TasteWebFragment extends BaseMvpFragment {
+public class GithubWebFragment extends BaseMvpFragment {
 
     @BindView(R.id.webview)
     WebView webView;

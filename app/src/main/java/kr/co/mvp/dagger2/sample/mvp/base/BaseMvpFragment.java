@@ -47,6 +47,8 @@ public abstract class BaseMvpFragment extends RxFragment implements BaseMvpView,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+
+
     }
 
 
